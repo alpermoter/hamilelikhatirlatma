@@ -1,20 +1,20 @@
 {
   "water": {
     "slot_date": "2026-05-16",
-    "slot_hour": 20,
+    "slot_hour": 21,
     "status": "pending",
-    "first_sent_at": "2026-05-16T20:18:22.233060+03:00",
-    "last_sent_at": "2026-05-16T20:18:22.233060+03:00",
+    "first_sent_at": "2026-05-16T21:12:08.418054+03:00",
+    "last_sent_at": "2026-05-16T21:12:08.418054+03:00",
     "snooze_until": null,
     "send_count": 1
   },
   "bp": {
-    "date": null,
-    "status": "idle",
-    "first_sent_at": null,
-    "last_sent_at": null,
+    "date": "2026-05-16",
+    "status": "pending",
+    "first_sent_at": "2026-05-16T21:12:09.397061+03:00",
+    "last_sent_at": "2026-05-16T21:12:09.397061+03:00",
     "snooze_until": null,
-    "send_count": 0
+    "send_count": 1
   },
-  "last_run_at": "2026-05-16T20:18:11.018381+03:00"
+  "last_run_at": "2026-05-16T21:11:56.922504+03:00"
 }
