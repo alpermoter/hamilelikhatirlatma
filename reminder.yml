@@ -1,0 +1,59 @@
+name: Hamilelik Hatirlatma
+
+# Her 5 dakikada bir çalışır. GitHub Actions cron en az 5 dk aralık destekler.
+# Cron UTC'dir. TR saatine göre 9:00-23:59 = UTC 6:00-20:59
+# Ama biz Python tarafında saat kontrolü yapıyoruz, bu yüzden 24 saat çalıştırıyoruz
+# (gereksiz çalışmalar Python tarafında erken çıkar)
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:  # Elle de tetiklenebilir (test için faydalı)
+
+# state.json dosyasını commit edebilmek için yazma izni
+permissions:
+  contents: write
+
+# Aynı anda birden fazla çalışmayı engelle (state.json çakışması olmasın)
+concurrency:
+  group: reminder
+  cancel-in-progress: false
+
+jobs:
+  run-reminder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Repo'yu klonla
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Bağımlılıkları yükle
+        run: pip install -r requirements.txt
+
+      - name: Hatırlatma script'ini çalıştır
+        env:
+          GREEN_API_INSTANCE: ${{ secrets.GREEN_API_INSTANCE }}
+          GREEN_API_TOKEN: ${{ secrets.GREEN_API_TOKEN }}
+          TARGET_PHONE: ${{ secrets.TARGET_PHONE }}
+        run: python reminder.py
+
+      - name: Değişiklikleri commit'le
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain state.json)" ]]; then
+            git add state.json
+            git commit -m "state: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            # Push - rebase yaparak çakışmaları engelle
+            for i in 1 2 3; do
+              git pull --rebase origin "${GITHUB_REF_NAME}" && \
+              git push && break || sleep 3
+            done
+          else
+            echo "State'te değişiklik yok"
+          fi
