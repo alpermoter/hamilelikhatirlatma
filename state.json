@@ -1,10 +1,10 @@
 {
   "water": {
     "slot_date": "2026-05-16",
-    "slot_hour": 15,
+    "slot_hour": 16,
     "status": "pending",
-    "first_sent_at": "2026-05-16T15:15:13.400391+03:00",
-    "last_sent_at": "2026-05-16T15:15:13.400391+03:00",
+    "first_sent_at": "2026-05-16T16:44:58.447993+03:00",
+    "last_sent_at": "2026-05-16T16:44:58.447993+03:00",
     "snooze_until": null,
     "send_count": 1
   },
@@ -16,5 +16,5 @@
     "snooze_until": null,
     "send_count": 0
   },
-  "last_run_at": "2026-05-16T15:15:02.372800+03:00"
+  "last_run_at": "2026-05-16T16:44:47.341200+03:00"
 }
