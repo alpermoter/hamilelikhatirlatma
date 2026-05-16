@@ -1,0 +1,20 @@
+{
+  "water": {
+    "slot_date": null,
+    "slot_hour": null,
+    "status": "idle",
+    "first_sent_at": null,
+    "last_sent_at": null,
+    "snooze_until": null,
+    "send_count": 0
+  },
+  "bp": {
+    "date": null,
+    "status": "idle",
+    "first_sent_at": null,
+    "last_sent_at": null,
+    "snooze_until": null,
+    "send_count": 0
+  },
+  "last_run_at": null
+}
